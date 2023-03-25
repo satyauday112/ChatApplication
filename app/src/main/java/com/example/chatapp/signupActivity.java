@@ -76,14 +76,9 @@ public class signupActivity extends AppCompatActivity {
         HashMap<String,String> data = new HashMap<String, String>();
         data.put("Name",nametxt);
         data.put("Phone Number",phtxt);
-        boolean done = fdb.getReference().child(mAuth.getUid()).setValue(data).isSuccessful();
+        fdb.getReference().child(mAuth.getUid()).setValue(data);
         fdb.getReference().child("Users").child(mAuth.getUid()).setValue(nametxt);
-        if(done) {
-            startActivity(new Intent(signupActivity.this, ActivityTwo.class));
-        }
-        else{
-            System.out.print("database update error!!");
-        }
+        startActivity(new Intent(signupActivity.this, ActivityTwo.class));
     }
 
 
