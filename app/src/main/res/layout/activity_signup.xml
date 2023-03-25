@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signupActivity" >
+
+
+    <ImageView
+        android:id="@+id/cutmlogo"
+        android:layout_width="185dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:layout_width="350dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittxtimg"
+        android:layout_below="@id/cutmlogo"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Name"
+        android:id="@+id/Name" />
+
+
+    <EditText
+        android:id="@+id/Mail"
+        android:layout_width="350dp"
+        android:background="@drawable/edittxtimg"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_below="@id/Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:hint="Mail" />
+
+    <EditText
+        android:id="@+id/phnumber"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Mail"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:text="+91"
+        android:layout_toLeftOf="@+id/phnumber"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Mail" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/phnumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:background="@drawable/edittxtimg"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="6dp"
+        android:id="@+id/passwd"
+        android:hint="Password"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/passwd"
+        android:layout_marginTop="20dp"
+        android:text="Sign Up"
+        android:id="@+id/btn" />
+
+
+</RelativeLayout>
