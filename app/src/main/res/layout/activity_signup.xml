@@ -41,17 +41,23 @@
 
     <EditText
         android:id="@+id/phnumber"
-        android:layout_width="300dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:padding="10dp"
+        android:hint="Phone Number"
         android:maxLength="10"
+        android:background="@drawable/edittxtimg"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/Mail"
         android:layout_marginTop="20dp" />
     <TextView
-        android:layout_width="20dp"
+        android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:text="+91"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
         android:layout_toLeftOf="@+id/phnumber"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/Mail" />

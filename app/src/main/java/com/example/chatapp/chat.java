@@ -86,9 +86,9 @@ public class chat extends AppCompatActivity {
         if(!message.isEmpty()){
             boolean sent;
             fdb.getReference().child(uid).child("chat").child(usr.getUid()).push().setValue(message).isSuccessful();
-//            System.out.println("SENt: "+sent);
+//            System.out.println("SENT: "+sent);
             msgs.add(message);
-//                msg.setText("");
+            msg.setText("");
             adapter.notifyDataSetChanged();
         }
     }

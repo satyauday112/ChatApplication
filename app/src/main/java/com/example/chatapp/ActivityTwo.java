@@ -51,7 +51,8 @@ public class ActivityTwo extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        adapter.clear();
+                        names.clear();
+                        uid.clear();
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             names.add((String) snapshot1.getValue());
                             uid.add(snapshot1.getKey());
