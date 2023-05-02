@@ -2,6 +2,8 @@ package com.example.chatapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class chat extends AppCompatActivity {
 
@@ -26,27 +29,30 @@ public class chat extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser usr;
     private TextView header;
-    private ListView lstview;
     private EditText msg;
     private Button btn;
     private String uid;
     private String receiver;
-    private ArrayList<String> msgs;
-    private ArrayAdapter<String> adapter;
+
+    private RecyclerView rcview;
+    private List<message> msgs;
+    private RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         header = findViewById(R.id.header);
-        lstview = findViewById(R.id.chat);
+        rcview = findViewById(R.id.chat);
         msg = findViewById(R.id.msg);
         btn = findViewById(R.id.sendBtn);
         mAuth = FirebaseAuth.getInstance();
         fdb = FirebaseDatabase.getInstance();
         usr = mAuth.getCurrentUser();
-        msgs = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, R.layout.sentmsg, msgs);
-        lstview.setAdapter(adapter);
+        msgs = new ArrayList<message>();
+        adapter = new Adapter(getApplicationContext(),msgs);
+        rcview.setLayoutManager(new LinearLayoutManager(this));
+        rcview.setAdapter(adapter);
         receiver = getIntent().getStringExtra("Name");
         uid = getIntent().getStringExtra("UID");
         header.setText(receiver);
@@ -55,10 +61,10 @@ public class chat extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 System.out.println("In snapsnot");
                 if (snapshot.exists()) {
-                    System.out.println("ENter snapsnot");
+                    System.out.println("Entered snapsnot");
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         System.out.println("Received from Database: "+snapshot1.getValue());
-                        msgs.add((String) snapshot1.getValue());
+                        msgs.add(new message((String) snapshot1.getValue(),false));
                         fdb.getReference().child(usr.getUid()).child("chat").child(uid).removeValue();
                         adapter.notifyDataSetChanged();
                     }
@@ -82,12 +88,12 @@ public class chat extends AppCompatActivity {
     }
 
     private void sendMsg() {
-        String message = msg.getText().toString();
-        if(!message.isEmpty()){
+        String msgtext = msg.getText().toString();
+        if(!msgtext.isEmpty()){
             boolean sent;
-            fdb.getReference().child(uid).child("chat").child(usr.getUid()).push().setValue(message).isSuccessful();
+            fdb.getReference().child(uid).child("chat").child(usr.getUid()).push().setValue(msgtext).isSuccessful();
 //            System.out.println("SENT: "+sent);
-            msgs.add(message);
+            msgs.add(new message(msgtext,true));
             msg.setText("");
             adapter.notifyDataSetChanged();
         }
